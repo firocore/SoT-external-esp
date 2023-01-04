@@ -40,12 +40,9 @@ class Test():
                                 self.overlay.draw_text(f"{actors_dict[actor][0]} | {distance}m", ('Arial', 14), position[0], position[1], (255, 255, 255), False)
                     # print((position[0]))
                 # print(actors_dict[actor][1])
-                #if type(position) != bool and 1920 > position[0] > 0 and 1080 > position[1] > 0:
-                #    
+                # if type(position) != bool and 1920 > position[0] > 0 and 1080 > position[1] > 0:
 
             self.overlay.update_overlay()
-
-
 
 
 if __name__ == '__main__':
