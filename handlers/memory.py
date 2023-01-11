@@ -1,5 +1,5 @@
 import json
-import pymemoryapi as pymem
+import libs.pymemoryapi as pymem
 
 from handlers.loger import Loger
 
@@ -106,9 +106,9 @@ class Memory():
                 print('[INFO] Actor.actorId address - ' + hex(self.camera_view_info))
                 print('[INFO] Actor.rootComponent address - ' + hex(self.camera_view_info))
                 print('[INFO] SceneComponent.ActorCoordinates address - ' + hex(self.camera_view_info))
-            else:
-                # Нужно сделать лог вывода промежуточного отсутвия адреса
-                print("Need log (memory 62)")
+
+            # Нужно сделать лог вывода промежуточного отсутвия адреса
+            print("Need log (memory 111)")
 
         except Exception as _error:
             print("[ERROR] " + _error)
@@ -118,21 +118,13 @@ class Memory():
         # Нужно дабавить офсет AActor
         address_AActor = self.process.read_ulonglong(self.address_U_level + 0xA0)
         amount_AActor = self.process.read_int(self.address_U_level + 0xA0 + 0x8)
-        # print(hex(address_AActor), str(amount_AActor))
 
         for i in range(0, amount_AActor):
             actor_address = self.process.read_ulonglong(address_AActor + i * 8)
-            # print(hex(actor_address))
             actor_id = self.process.read_int(actor_address + self.offset_actorId)
-            # print(actor_id)
 
             if actor_id != 0:
                 actors_dict[actor_address] = self.get_actor_name(actor_id), actor_id
-                # print(self.get_actor_cords(actor_address))
-        
-        if self.debug:
-            # print(actors_dict)
-            pass
 
         return actors_dict
 
@@ -153,6 +145,7 @@ class Memory():
         name = self.process.read_ulonglong(self.address_GNAME + int(actor_id / 0x4000) * 8)
         name = self.process.read_ulonglong(name + 8 * (actor_id % 0x4000))
         name = self.process.read_string(name + 0x10, 32)
+        
         return name
 
     def get_local_player_info(self):

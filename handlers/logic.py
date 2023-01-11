@@ -83,5 +83,6 @@ def dot(array_1: tuple, array_2: tuple):
 
 
 def get_actor_distance(local_player_cords, actor_cords) -> int:
+    # Вычисление дистанции работает криво надо переделать!
     return int(math.sqrt(
         (actor_cords['cordinate_x'] - local_player_cords['localPlayer_x']) ** 2 + (actor_cords['cordinate_y'] - local_player_cords['localPlayer_y']) ** 2 + (actor_cords['cordinate_z'] - local_player_cords['localPlayer_z']) ** 2))

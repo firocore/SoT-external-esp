@@ -1,4 +1,4 @@
-import pymemoryapi as pymem
+import libs.pymemoryapi as pymem
 import threading
 
 from handlers.overlayrep import Overlay
