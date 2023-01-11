@@ -1,0 +1,1 @@
+Для обновления офсетов используйте https://github.com/firocore/SoT-offsets-finder

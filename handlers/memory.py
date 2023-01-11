@@ -102,10 +102,10 @@ class Memory():
                 # Подгружаем офстевы для Actor(Entity)
                 self.offset_actorId = self.offsets['Actor.actorId']
                 self.rootComponent = self.offsets['Actor.rootComponent']
-                self.ActorCoordinates = self.offsets['SceneComponent.ActorCoordinates']
-                print('[INFO] Actor.actorId address - ' + hex(self.camera_view_info))
-                print('[INFO] Actor.rootComponent address - ' + hex(self.camera_view_info))
-                print('[INFO] SceneComponent.ActorCoordinates address - ' + hex(self.camera_view_info))
+                self.relative_location = self.offsets['SceneComponent.RelativeLocation']
+                print('[INFO] Actor.actorId address - ' + hex(self.offset_actorId))
+                print('[INFO] Actor.rootComponent address - ' + hex(self.rootComponent))
+                print('[INFO] SceneComponent.ActorCoordinates address - ' + hex(self.ActorCoordinates))
 
             # Нужно сделать лог вывода промежуточного отсутвия адреса
             print("Need log (memory 111)")
@@ -130,11 +130,13 @@ class Memory():
 
     def get_actor_cords(self, actor_address: int):
         u_scene_component = self.process.read_ulonglong(actor_address + self.rootComponent)
-        relative_location = u_scene_component + self.ActorCoordinates
+        relative_location = u_scene_component + self.relative_location
 
         cords_dict = {}
 
         # Получаем и записываем коодинаты entity в dict | Cмещение по адресу int 0, 4, 8
+
+        # Не могу проверить скорее всего коодинаты сломались после обновления старый оффтест hex 12С или int 300
         cords_dict["cordinate_x"] = self.process.read_float(relative_location + 0x0)
         cords_dict["cordinate_y"] = self.process.read_float(relative_location + 0x4)
         cords_dict["cordinate_z"] = self.process.read_float(relative_location + 0x8)
