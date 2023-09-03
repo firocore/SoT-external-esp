@@ -102,7 +102,6 @@ class Overlay():
                     self.__overlay_screen.blit(shape['image'].image, (shape['x'], shape['y']))
 
         pygame.display.update()
-        time.sleep(0.001)
         win32gui.ShowWindow(self.__overlay_hwnd, win32con.SW_SHOW)
         win32gui.SetWindowLong(self.__overlay_hwnd, win32con.GWL_EXSTYLE, win32gui.GetWindowLong(self.__overlay_hwnd, win32con.GWL_EXSTYLE) | win32con.WS_EX_TOOLWINDOW)
         self.__entity_list = []

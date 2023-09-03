@@ -95,17 +95,17 @@ class Memory():
                 print('[INFO] APlayerController address - ' + hex(self.player_controller))
 
                 # Поличение информацию о камере игрока CameraCacheEntry.MinimalViewInfo
-                camera_manager = self.process.read_ulonglong(self.player_controller + self.offsets['PlayerController.CameraManager'])
+                camera_manager = self.process.read_ulonglong(self.player_controller + self.offsets['APlayerController.CameraManager'])
                 self.camera_view_info = camera_manager + self.offsets['PlayerCameraManager.CameraCache'] + self.offsets['CameraCacheEntry.MinimalViewInfo']
                 print('[INFO] MinimalViewInfo address - ' + hex(self.camera_view_info))
 
                 # Подгружаем офстевы для Actor(Entity)
-                self.offset_actorId = self.offsets['Actor.actorId']
-                self.rootComponent = self.offsets['Actor.rootComponent']
+                self.offset_actorId = self.offsets['AActor.actorId']
+                self.rootComponent = self.offsets['AActor.rootComponent']
                 self.relative_location = self.offsets['SceneComponent.RelativeLocation']
                 print('[INFO] Actor.actorId address - ' + hex(self.offset_actorId))
                 print('[INFO] Actor.rootComponent address - ' + hex(self.rootComponent))
-                print('[INFO] SceneComponent.ActorCoordinates address - ' + hex(self.ActorCoordinates))
+                print('[INFO] SceneComponent.ActorCoordinates address - ' + hex(self.relative_location))
 
             # Нужно сделать лог вывода промежуточного отсутвия адреса
             print("Need log (memory 111)")
